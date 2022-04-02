@@ -10,17 +10,17 @@ const Home = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <FocusedStatusBar background={COLORS.primary} />
-      <NFTDataList />
+      <NFTDataList data={NFTData} />
     </SafeAreaView>
   );
 };
 
-const NFTDataList = () => (
+const NFTDataList = ({data}) => (
   <View style={{flex: 1}}>
     {/* it's appearing ontop, send text in front */}
     <View style={{zIndex: 1}}>
       <FlatList
-        data={NFTData}
+        data={data}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => <NFTCard data={item} />}
         showsVerticalScrollIndicator={false}

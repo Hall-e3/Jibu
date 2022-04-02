@@ -2,7 +2,7 @@
 import React from 'react';
 
 import {Text, TouchableOpacity, Image} from 'react-native';
-import {COLORS, SHADOWS, SIZES} from '../constants';
+import {COLORS, FONTS, SHADOWS, SIZES} from '../constants';
 
 export const HeartButton = props => {
   return (
@@ -12,20 +12,42 @@ export const HeartButton = props => {
         height: 30,
         width: 30,
         borderRadius: SIZES.extraLarge,
+        backgroundColor: COLORS.white,
         alignItems: 'center',
         justifyContent: 'center',
         ...SHADOWS,
         ...props,
-      }}>
+      }}
+      onPress={props.onPress}>
       <Image
         source={props.imgUrl}
-        style={{height: '100%', width: '100%'}}
+        style={{height: '80%', width: '80%'}}
         resizeMode="contain"
       />
     </TouchableOpacity>
   );
 };
 
-export const RectButton = () => {
-  return <Text>Rect Button</Text>;
+export const RectButton = ({minWidth, fontSize, handlePress, ...props}) => {
+  return (
+    <TouchableOpacity
+      style={{
+        borderRadius: SIZES.extraLarge,
+        backgroundColor: COLORS.primary,
+        minWidth: minWidth,
+        padding: SIZES.small,
+        ...props,
+      }}
+      onPress={handlePress}>
+      <Text
+        style={{
+          fontFamily: FONTS.semiBold,
+          textAlign: 'center',
+          fontSize: fontSize,
+          color: COLORS.white,
+        }}>
+        Place a Bid
+      </Text>
+    </TouchableOpacity>
+  );
 };
