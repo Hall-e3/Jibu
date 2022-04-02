@@ -1,1 +1,5 @@
 # Jibu
+
+# dependences
+
+/node-modules
