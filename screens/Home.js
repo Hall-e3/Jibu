@@ -1,21 +1,42 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 
-import {Text, SafeAreaView, View, FlatList} from 'react-native';
+import {SafeAreaView, View, FlatList} from 'react-native';
 
 import {COLORS, NFTData} from '../constants';
 import {HomeHeader, FocusedStatusBar, NFTCard} from '../components';
 
 const Home = () => {
+  const [nftData, setNftData] = React.useState(NFTData);
+  const [text, setText] = React.useState('');
+  console.log(text);
+  console.log(nftData);
+
+  const handleSearch = text => {
+    if (!text.length) return setNftData(NFTData);
+    const filteredData = NFTData.filter(item =>
+      item.name.toLowerCase().includes(text.toLowerCase()),
+    );
+    if (filteredData.length) {
+      setNftData(filteredData);
+    } else {
+      setNftData(NFTData);
+    }
+  };
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <FocusedStatusBar background={COLORS.primary} />
-      <NFTDataList data={NFTData} />
+      <NFTDataList
+        data={nftData}
+        handleSearch={handleSearch}
+        setText={setText}
+      />
     </SafeAreaView>
   );
 };
 
-const NFTDataList = ({data}) => (
+const NFTDataList = ({data, handleSearch, setText}) => (
   <View style={{flex: 1}}>
     {/* it's appearing ontop, send text in front */}
     <View style={{zIndex: 1}}>
@@ -24,7 +45,9 @@ const NFTDataList = ({data}) => (
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => <NFTCard data={item} />}
         showsVerticalScrollIndicator={false}
-        ListHeaderComponent={<HomeHeader />}
+        ListHeaderComponent={
+          <HomeHeader onSearch={handleSearch} setText={setText} />
+        }
       />
     </View>
     {/* send text back ward */}

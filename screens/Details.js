@@ -71,6 +71,16 @@ const Details = ({route, navigation}) => {
             <SubInfo />
             <View style={{padding: 15}}>
               <DetailDesc data={data} />
+              {data.bids.length > 0 && (
+                <Text
+                  style={{
+                    fontFamily: FONTS.semiBold,
+                    fontSize: SIZES.large,
+                    color: COLORS.primary,
+                  }}>
+                  Current Bid
+                </Text>
+              )}
             </View>
           </React.Fragment>
         )}
