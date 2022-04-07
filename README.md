@@ -14,6 +14,7 @@ knowledge level:
 basic understanding of React-js and JavaScript
 
 # dependences
+React Native Cli
 
 /node-modules
 
